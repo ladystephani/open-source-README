@@ -1,29 +1,77 @@
 const fs = require("fs");
+const inquirer = require("inquirer");
+const generateMd = require("./src/md-template");
 
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-const name = profileDataArgs[0];
-const github = profileDataArgs[1];
-
-// template literal
-const generateMd = (userName, githubName) => {
-  return `# Project-name-placeholder
-## Description
-desc placeholder variable
-## How to install
-installment placeholder
-## Invite to collaborate
-An invitation text placeholder
-## License
-This application is open source.
-## Created by:
-  Name: ${userName}
-  GitHub: ![https://github.com/${githubName}]
-`;
+const promptUser = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      message: "What is your project name?",
+      name: "projectName",
+    },
+    {
+      type: "input",
+      message: "Describe your project: (Required)",
+      name: "description",
+    },
+    {
+      type: "checkbox",
+      choices: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "ES6",
+        "jQuery",
+        "Bootstrap",
+        "Node",
+      ],
+      message: "What languages or technologies did you use in this project?",
+      name: "technology",
+    },
+    {
+      type: "confirm",
+      message:
+        "Would you like to set up a section as an invitation for contributors?",
+      name: "confirmContributors",
+      default: false,
+    },
+    {
+      type: "input",
+      message:
+        "Write some text to explain to contributors what steps they should follow to join the project:",
+      name: "invitation",
+      when: ({ confirmContributors }) => {
+        if (confirmContributors) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+    },
+    {
+      type: "checkbox",
+      choices: ["MIT", "Placeholder"],
+      message: "Which licenses do you intend to have for this project?",
+      name: "license",
+    },
+    {
+      type: "input",
+      message: "Who is the author of your project?",
+      name: "author",
+    },
+    {
+      type: "input",
+      message: "Please enter your GitHub username:",
+      name: "github",
+    },
+  ]);
 };
-//console.log(generateMd(name, github));
 
-//writeFile
-fs.writeFile("./README.md", generateMd(name, github), (err) => {
-  if (err) throw err;
-  console.log("File creating...Please check directory.");
+// must add () when calling prompUser() inquirer function
+promptUser().then((userEnteredData) => {
+  // write the file
+  fs.writeFile("./README.md", generateMd(userEnteredData), (err) => {
+    if (err) throw err;
+    console.log("File creating...Please check directory.");
+  });
 });

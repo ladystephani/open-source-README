@@ -1,0 +1,23 @@
+{
+  "name": "open-source-README",
+  "version": "1.0.0",
+  "description": "desc placeholder variable ## How to install installment placeholder ## Invite to collaborate An invitation text placeholder ## License This application is open source. ## Created by:   Name: lady   GitHub: ![https://github.com/ladystephani]",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ladystephani/open-source-README.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ladystephani/open-source-README/issues"
+  },
+  "homepage": "https://github.com/ladystephani/open-source-README#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
+}
