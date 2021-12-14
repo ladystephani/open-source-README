@@ -1,5 +1,6 @@
-const fs = require("fs");
 const inquirer = require("inquirer");
+const fs = require("fs");
+
 const generateMd = require("./src/md-template");
 
 const promptUser = () => {
@@ -15,15 +16,20 @@ const promptUser = () => {
       name: "description",
     },
     {
+      type: "input",
+      message: "Explain how to install your project: (Required)",
+      name: "installment",
+    },
+    {
       type: "checkbox",
       choices: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "ES6",
-        "jQuery",
-        "Bootstrap",
-        "Node",
+        " HTML",
+        " CSS",
+        " JavaScript",
+        " ES6",
+        " jQuery",
+        " Bootstrap",
+        " Node.js",
       ],
       message: "What languages or technologies did you use in this project?",
       name: "technology",
@@ -50,7 +56,12 @@ const promptUser = () => {
     },
     {
       type: "checkbox",
-      choices: ["MIT", "Placeholder"],
+      choices: [
+        " MIT",
+        " PostgreSQL License",
+        " Open Software License 3.0",
+        " Mozilla Public License 2.0",
+      ],
       message: "Which licenses do you intend to have for this project?",
       name: "license",
     },
@@ -68,10 +79,11 @@ const promptUser = () => {
 };
 
 // must add () when calling prompUser() inquirer function
-promptUser().then((userEnteredData) => {
+promptUser().then((data) => {
   // write the file
-  fs.writeFile("./README.md", generateMd(userEnteredData), (err) => {
+  fs.writeFile("./README.md", generateMd(data), (err) => {
     if (err) throw err;
     console.log("File creating...Please check directory.");
+    //console.log(`${data.projectName}`);
   });
 });
