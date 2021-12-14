@@ -1,18 +1,17 @@
 const generateMd = (userEnteredData) => {
-  return `# Project-name-placeholder
+  return `# ${userEnteredData.projectName}
 ## Description
-desc placeholder variable
+${userEnteredData.description}
 ## How to install
-installment placeholder
+${userEnteredData.installment}
 ## Technologies used
-tech names
-## Invite to contribute
-An invitation text placeholder
+${userEnteredData.technology}
 ## License
-This application is open source.
+${userEnteredData.license}
 ## Created by:
-Name: ${userEnteredData.author}
-Link to GitHub: ![https://github.com/${userEnteredData.github}]
+Name: ${userEnteredData.author}  
+
+[Link to GitHub](https://github.com/${userEnteredData.github})
 `;
 };
 module.exports = generateMd;
